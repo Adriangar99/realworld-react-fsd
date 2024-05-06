@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  db:
+    image: mariadb:lts
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_DATABASE: conduit
+
+  api:
+    image: ghcr.io/danielramosacosta/nestjs-realworld-example-app:latest
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      DB_DATABASE: conduit
+    ports:
+      - '3000:3000'
