@@ -7,15 +7,6 @@ import {
 } from './fixtures/article';
 
 test('write an article', async ({ page }) => {
-  await page.goto('/login');
-  await page.getByPlaceholder(/email/i).fill('danielramos@test.com');
-  await page.getByPlaceholder(/password/i).fill('Megustaeltdd');
-  await page
-    .getByRole('button', {
-      name: 'Sign in',
-    })
-    .click();
-
   await page
     .getByRole('link', {
       name: /new article/i,

@@ -41,6 +41,6 @@
       "~shared/*": ["./shared/*"]
     }
   },
-  "include": ["src", "types"],
+  "include": ["src", "types", "tests/fixture.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
