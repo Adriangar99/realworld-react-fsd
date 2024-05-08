@@ -4,11 +4,8 @@ import {
     ARTICLE_TEXT,
     ARTICLE_TITLE,
 } from './fixtures/article';
-import {userForIndex} from "./fixtures/users.ts";
 
 test('write an article', async ({page}) => {
-    const user = userForIndex(0)
-    await loginOrSignUp({page, user})
     await page.goto('/');
     await page
         .getByRole('link', {
