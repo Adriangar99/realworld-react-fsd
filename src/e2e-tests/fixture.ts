@@ -32,6 +32,7 @@ export const loginOrSignUp = async ({page, user}: { page: Page; user: User }) =>
                     name: 'Sign up',
                 })
                 .click();
+            await page.waitForURL(/profile/)
         }
     }
 };
