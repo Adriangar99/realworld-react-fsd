@@ -1,11 +1,14 @@
-import { test, expect } from './fixture';
+import {test, expect, loginOrSignUp} from './fixture';
 import {
     ARTICLE_RESUME,
     ARTICLE_TEXT,
     ARTICLE_TITLE,
 } from './fixtures/article';
+import {userForIndex} from "./fixtures/users.ts";
 
-test('write an article', async ({ page }) => {
+test('write an article', async ({page}) => {
+    const user = userForIndex(0)
+    await loginOrSignUp({page, user})
     await page.goto('/');
     await page
         .getByRole('link', {
@@ -32,6 +35,6 @@ test('write an article', async ({ page }) => {
         .click();
 
     await expect(
-        page.getByRole('heading', { name: ARTICLE_TITLE }),
+        page.getByRole('heading', {name: ARTICLE_TITLE}),
     ).toBeVisible();
 });

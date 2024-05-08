@@ -3,14 +3,12 @@ import path from 'path';
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
 import unfonts from 'unplugin-fonts/vite';
-import checker from 'vite-plugin-checker';
 
 // https://vitejs.dev/config/
 export default defineConfig(({mode}) => ({
     ...(mode !== 'test' && {
         plugins: [
             react(),
-            checker({typescript: true}),
             unfonts({
                 google: {
                     families: [

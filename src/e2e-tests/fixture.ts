@@ -1,13 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import {test as base, Page} from '@playwright/test';
-import {User, userForIndex} from './fixtures/users';
+import {User} from './fixtures/users';
 
 export * from '@playwright/test';
 
 // eslint-disable-next-line no-use-before-define
-const getParallelIndex = () => test.info().parallelIndex;
+// const getParallelIndex = () => test.info().parallelIndex;
 
-const loginOrSignUp = async ({page, user}: { page: Page; user: User }) => {
+export const loginOrSignUp = async ({page, user}: { page: Page; user: User }) => {
     try {
         await page.goto('/');
         await page.getByText('Your Feed').waitFor({timeout: 300});
@@ -40,22 +40,22 @@ export const test = base.extend<
     { user: User },
     { workerStorageState: string }
 >({
-    storageState: ({workerStorageState}, use) => use(workerStorageState),
-    user: async ({page: _}, use) => {
-        const id = getParallelIndex();
-        const user = userForIndex(id);
-        await use(user);
-    },
-    workerStorageState: [
-        async ({browser}, use) => {
-            const id = getParallelIndex();
-            const user = userForIndex(id);
-            const app = await user.instance(browser, 'http://localhost:5173');
-            await loginOrSignUp({page: app.page, user});
-            await app.page.context().storageState({path: user.path});
-            await use(user.path);
-            await app.context.close();
-        },
-        {scope: 'worker'},
-    ],
+//    storageState: ({workerStorageState}, use) => use(workerStorageState),
+//    user: async ({page: _}, use) => {
+//        const id = getParallelIndex();
+//        const user = userForIndex(id);
+//        await use(user);
+//    },
+//    workerStorageState: [
+//        async ({browser}, use) => {
+//            const id = getParallelIndex();
+//            const user = userForIndex(id);
+//            const app = await user.instance(browser, 'http://localhost:5173');
+//            await loginOrSignUp({page: app.page, user});
+//            await app.page.context().storageState({path: user.path});
+//            await use(user.path);
+//            await app.context.close();
+//        },
+//        {scope: 'worker'},
+//    ],
 });
