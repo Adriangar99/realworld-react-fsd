@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - master
+      - add-e2e-tests
   pull_request:
     branches:
       - master
+      - add-e2e-tests
 
 jobs:
   test:
